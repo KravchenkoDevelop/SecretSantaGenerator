@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UserManagement\UserService\UserService.csproj" />
+    <ProjectReference Include="..\UserService\UserService.csproj" />
   </ItemGroup>
 
 </Project>
