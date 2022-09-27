@@ -1,4 +1,6 @@
-namespace UserDM
+using System.Collections.ObjectModel;
+
+namespace DM
 {
     public class Tenant
     {
@@ -16,5 +18,10 @@ namespace UserDM
         ///  tenant account creation date
         /// </summary>
         public DateTime CreationDate { get; set; } = DateTime.Now;
+
+        /// <summary>
+        ///  users entiti
+        /// </summary>
+        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace DM.Models
+﻿namespace DM
 {
     /// <summary>
     ///     person hobbies or interests
@@ -12,9 +12,9 @@
         public Guid Id { get; set; }
 
         /// <summary>
-        ///     binding person
+        ///    person entity 
         /// </summary>
-        public virtual Person Person { get; set; }
+        public virtual User Person { get; set; }
 
         /// <summary>
         ///     person id

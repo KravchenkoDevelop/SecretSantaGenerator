@@ -1,12 +1,12 @@
 {
   "profiles": {
-    "UserService": {
+    "Test.Sanity": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:54850;http://localhost:54851"
+      "applicationUrl": "https://localhost:61755;http://localhost:61756"
     }
   }
 }
