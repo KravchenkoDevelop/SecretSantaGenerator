@@ -20,21 +20,11 @@ namespace DM
         /// tenant entity
         /// </summary>
         public virtual Tenant Tenant { get; set; }
-
-        /// <summary>
-        /// user contact information id
-        /// </summary>
-        public Guid UserDataId { get; set; }
-
-        /// <summary>
-        /// user data entity
-        /// </summary>
-        public virtual UserData UserData { get; set; }
-
+                
         /// <summary>
         ///     user role 
         /// </summary>
-        public UserRoles Roles { get; set; }
+        public UserRoles Role { get; set; }
 
         /// <summary>
         ///     user interests
