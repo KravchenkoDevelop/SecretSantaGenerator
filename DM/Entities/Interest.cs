@@ -1,7 +1,7 @@
 ﻿namespace DM
 {
     /// <summary>
-    ///     person hobbies or interests
+    ///     User hobbies or interests
     /// </summary>
     public class Interest
     {
@@ -12,14 +12,14 @@
         public Guid Id { get; set; }
 
         /// <summary>
-        ///    person entity 
+        ///    User entity 
         /// </summary>
-        public virtual User Person { get; set; }
+        public virtual User User { get; set; }
 
         /// <summary>
-        ///     person id
+        ///     user id
         /// </summary>
-        public Guid PersonId { get; set; }
+        public Guid UserId { get; set; }
 
         /// <summary>
         ///     interest description

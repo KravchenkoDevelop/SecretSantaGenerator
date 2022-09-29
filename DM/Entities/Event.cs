@@ -29,7 +29,7 @@
         /// <summary>
         ///     event description
         /// </summary>
-        public string Article { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         ///     event date create
