@@ -24,17 +24,17 @@ namespace DM
         /// <summary>
         /// gift giver id
         /// </summary>
-        public Guid GiftRecieverId { get; set; }
+        public Guid GiftGiverId { get; set; }
 
         /// <summary>
         /// gift reciever entity
         /// </summary>
-        public virtual User GiftReciver { get; set; }
+        public virtual User GiftAcceptor { get; set; }
 
         /// <summary>
         /// gift reciever id
         /// </summary>
-        public Guid GiftReciverId { get; set; }
+        public Guid GiftAccceptorId { get; set; }
 
         /// <summary>
         /// event entity

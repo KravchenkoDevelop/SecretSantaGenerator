@@ -30,16 +30,6 @@ namespace DM
         ///     user interests
         /// </summary>
         public virtual ICollection<Interest> UserInterests { get; set; }
-                
-        /// <summary>
-        ///     found companion
-        /// </summary>
-        public virtual Companion Companion{ get; set; }
-
-        /// <summary>
-        /// pair id
-        /// </summary>
-        public Guid PairId { get; set; }    
 
         /// <summary>
         ///     user activity
