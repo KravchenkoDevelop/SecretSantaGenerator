@@ -18,7 +18,8 @@ namespace BLL
             #endregion
         }
 
-        public static void RegisterServices(this IContainer container)
+
+        public static void RegisterServices(this IRegistrator reg)
         {
             #region debug and test area
 #if DEBUG || MYTESTS
