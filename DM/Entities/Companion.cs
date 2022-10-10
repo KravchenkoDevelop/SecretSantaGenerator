@@ -45,7 +45,5 @@ namespace DM
         /// event id
         /// </summary>
         public Guid EventId { get; set; }
-
-
     }
 }
