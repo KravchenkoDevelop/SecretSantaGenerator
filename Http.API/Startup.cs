@@ -14,12 +14,11 @@ namespace Http.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddApplicationPart(Assembly.Load(new AssemblyName("Service.API"))); ;
+            services.AddMvc();
             services.AddControllers();
             services.AddSwaggerGen(o =>
             {
                 o.SwaggerDoc($"v1", new OpenApiInfo { Title = "API Secret Santa Generator", Version = "v1" });
-                o.IncludeXmlComments($".\\bin\\Service.API.xml");
             });
             services.AddCors();
 
