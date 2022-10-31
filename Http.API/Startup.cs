@@ -18,7 +18,27 @@ namespace Http.API
             services.AddControllers();
             services.AddSwaggerGen(o =>
             {
-                o.SwaggerDoc($"v1", new OpenApiInfo { Title = "API Secret Santa Generator", Version = "v1" });
+                o.SwaggerDoc($"{Assembly.GetExecutingAssembly().GetName().Name}", new OpenApiInfo
+                {
+                    Title = "API Secret Santa Generator",
+                    Version = $"{Assembly.GetExecutingAssembly().GetName().Version.Major}",
+                    Description = "Secret Santa API generator",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Tatiana Kravchenko",
+                        Email = "kravchenkodevelop@gmail.com",
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT License"
+                    }
+                });
+                o.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
+
+                o.ResolveConflictingActions(apidescription => apidescription.First());
+                o.IgnoreObsoleteActions();
+                o.IgnoreObsoleteProperties();
+                o.CustomSchemaIds(t => t.FullName);
             });
             services.AddCors();
 
@@ -27,20 +47,47 @@ namespace Http.API
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseHttpsRedirection();
+#if DEBUG
+            app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
-            app.UseRouting();
-
+#endif
             app.UseSwagger(o =>
             {
-                o.RouteTemplate = "api-docs/{documentName}/swagger.json";
+                o.RouteTemplate = "api-docs/swagger.json";
                 o.SerializeAsV2 = true;
             });
             app.UseSwaggerUI(o =>
             {
-                o.SwaggerEndpoint("v1/swagger.json", "API Secret Santa Generator v1");
+                o.SwaggerEndpoint($"v{Assembly.GetExecutingAssembly().GetName().Version.Major}/swagger.json", $"API Secret Santa Generator v{Assembly.GetExecutingAssembly().GetName().Version.Major}");
                 o.RoutePrefix = "api-docs";
             });
+
+            //app.UseSwagger(options =>
+            //{
+            //    options.SerializeAsV2 = true;
+            //});
+            //app.UseSwaggerUI(options =>
+            //{
+            //    options.SwaggerEndpoint("../swagger/v1/swagger.json", "v1");
+            //    options.RoutePrefix = string.Empty;
+            //});
+
+            app.UseStatusCodePages();
+            app.UseDefaultFiles(); app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(e =>
+            {
+                e.MapControllers();
+            });
+
         }
+
+        public string SomeString()
+        {
+            return "some message";
+        }
+
+
     }
 }
