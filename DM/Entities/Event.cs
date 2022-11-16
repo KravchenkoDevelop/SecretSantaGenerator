@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-
-namespace DM.Models
+﻿namespace DM
 {
     /// <summary>
     ///     event description
@@ -10,7 +8,7 @@ namespace DM.Models
         /// <summary>
         ///     event id
         /// </summary>
-        [BsonId]
+       
         public Guid Id { get; set; }
 
         /// <summary>
@@ -31,13 +29,12 @@ namespace DM.Models
         /// <summary>
         ///     event description
         /// </summary>
-        public string Article { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         ///     event date create
         /// </summary>
         public DateTime DateCreate { get; set; } = DateTime.Today;
 
-        public virtual ICollection<Person> EventMembers { get; set; } = new HashSet<Person>();
     }
 }

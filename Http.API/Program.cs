@@ -1,25 +1,35 @@
-var builder = WebApplication.CreateBuilder(args);
+using BLL;
+using DryIoc;
+using DryIoc.Microsoft.DependencyInjection;
+using Http.API;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+internal class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        var startup = new Startup(builder.Configuration);
+
+        startup.ConfigureServices(builder.Services);
+
+        builder.WebHost.UseIISIntegration();
+
+        // DI stuff
+        var container = new Container(r => r.With(propertiesAndFields: req => req.ServiceType.Name.EndsWith("Controller") ? PropertiesAndFields.Properties()(req) : null));
+        container.RegisterServices();
+
+        var factory = new DryIocServiceProviderFactory(container);
+
+        builder.Host.UseServiceProviderFactory(new DryIocServiceProviderFactory(container));
+        builder.Host.UseContentRoot(Directory.GetCurrentDirectory());
+
+        var app = builder.Build();
+
+        app.MapControllers();
+
+        startup.Configure(app);
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
