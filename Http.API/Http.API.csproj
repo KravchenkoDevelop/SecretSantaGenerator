@@ -44,4 +44,8 @@
 		<Exec Command="dotnet swagger &quot;tofile&quot; --output $(OutputPath)api-docs\v1\swagger.json &quot;$(OutputPath)$(AssemblyName).dll&quot; v1"></Exec>
 	</Target>
 
+  <ItemGroup>
+    <Folder Include="Controllers\SwaggerDoc" />
+  </ItemGroup>
+
 </Project>
