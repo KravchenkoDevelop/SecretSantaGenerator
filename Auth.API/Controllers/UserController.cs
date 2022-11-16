@@ -7,5 +7,6 @@ namespace Auth.API.Controllers
     [ApiController]
     public partial class UserController : ControllerBase
     {
+
     }
 }
