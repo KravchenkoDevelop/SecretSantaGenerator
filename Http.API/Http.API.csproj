@@ -13,18 +13,35 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-				<DocumentationFile>.\bin\x64\Debug\net6.0\Http.API.xml</DocumentationFile>
+		<DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
 	</PropertyGroup>
-	
+
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-				<DocumentationFile>.\bin\x64\Release\net6.0\Http.API.xml</DocumentationFile>
+		<DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\BLL\BLL.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Http.API.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<Target Name="SwaggerPostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="dotnet tool restore" />
+		<Exec Command="dotnet tool install --local Swashbuckle.AspNetCore.Cli --version 6.4.0"/>
+		<Exec Command="if exist $(OutputPath)api-docs rd /q /s $(OutputPath)api-docs"></Exec>
+		<Exec Command="if exist $(OutputPath)api-docs\v1 rd /q /s $(OutputPath)api-docs\v1"></Exec>
+		<Exec Command="mkdir $(OutputPath)api-docs" ></Exec>
+		<Exec Command="mkdir $(OutputPath)api-docs\v1"  ></Exec>
+		<Exec Command="dotnet swagger &quot;tofile&quot; --output $(OutputPath)api-docs\v1\swagger.json &quot;$(OutputPath)$(AssemblyName).dll&quot; v1"></Exec>
+	</Target>
+
 </Project>

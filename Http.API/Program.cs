@@ -26,6 +26,8 @@ internal class Program
 
         var app = builder.Build();
 
+        app.MapControllers();
+
         startup.Configure(app);
 
         app.Run();

@@ -18,10 +18,10 @@ namespace Http.API
             services.AddControllers();
             services.AddSwaggerGen(o =>
             {
-                o.SwaggerDoc($"{Assembly.GetExecutingAssembly().GetName().Name}", new OpenApiInfo
+                o.SwaggerDoc($"v{Assembly.GetExecutingAssembly().GetName().Version.Major}", new OpenApiInfo
                 {
                     Title = "API Secret Santa Generator",
-                    Version = $"{Assembly.GetExecutingAssembly().GetName().Version.Major}",
+                    Version = $"v{Assembly.GetExecutingAssembly().GetName().Version.Major}",
                     Description = "Secret Santa API generator",
                     Contact = new OpenApiContact
                     {
@@ -41,53 +41,39 @@ namespace Http.API
                 o.CustomSchemaIds(t => t.FullName);
             });
             services.AddCors();
+            services.AddControllers();
 
             services.AddEndpointsApiExplorer();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-#if DEBUG
+#if DEBUG||MYTESTS 
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
 #endif
+
             app.UseSwagger(o =>
             {
-                o.RouteTemplate = "api-docs/swagger.json";
+                o.RouteTemplate = "api-docs/{documentName}/swagger.json";
                 o.SerializeAsV2 = true;
             });
             app.UseSwaggerUI(o =>
             {
-                o.SwaggerEndpoint($"v{Assembly.GetExecutingAssembly().GetName().Version.Major}/swagger.json", $"API Secret Santa Generator v{Assembly.GetExecutingAssembly().GetName().Version.Major}");
+                o.DocumentTitle = "Secret Santa Generator API";
                 o.RoutePrefix = "api-docs";
+                o.SwaggerEndpoint("../api-docs/v1/swagger.json", $"API Secret Santa Generator v1");
             });
 
-            //app.UseSwagger(options =>
-            //{
-            //    options.SerializeAsV2 = true;
-            //});
-            //app.UseSwaggerUI(options =>
-            //{
-            //    options.SwaggerEndpoint("../swagger/v1/swagger.json", "v1");
-            //    options.RoutePrefix = string.Empty;
-            //});
+
+            //app.UseSwagger();
+            //app.UseSwaggerUI();
 
             app.UseStatusCodePages();
             app.UseDefaultFiles(); app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
-            app.UseEndpoints(e =>
-            {
-                e.MapControllers();
-            });
 
         }
-
-        public string SomeString()
-        {
-            return "some message";
-        }
-
-
     }
 }
