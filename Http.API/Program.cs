@@ -1,4 +1,5 @@
 using BLL;
+using DAL;
 using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
 using Http.API;

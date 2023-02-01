@@ -17,19 +17,14 @@ namespace DM
         public Guid TenantId { get; set; }
 
         /// <summary>
-        /// tenant entity
-        /// </summary>
-        public virtual Tenant Tenant { get; set; }
-                
-        /// <summary>
         ///     user role 
         /// </summary>
-        public UserRoles Role { get; set; }
+        public ICollection<UserRoles> Role { get; set; }
 
         /// <summary>
         ///     user interests
         /// </summary>
-        public virtual ICollection<Interest> UserInterests { get; set; }
+        public ICollection<Interest> UserInterests { get; set; }
 
         /// <summary>
         ///     user activity

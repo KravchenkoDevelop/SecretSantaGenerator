@@ -1,5 +1,8 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using DAL;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using DAL.Context;
 
 namespace Http.API
 {
@@ -15,7 +18,17 @@ namespace Http.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddCors();
             services.AddControllers();
+
+#if DEBUG 
+            var provider = services.BuildServiceProvider();
+            DataStub.InitStub(provider);
+            services.AddDbContext<StubDBContext>(o => o.UseInMemoryDatabase("SantaDB"));
+#endif
+            services.AddDbContext<SantaDBContext>(ServiceLifetime.Singleton);
+
+
             services.AddSwaggerGen(o =>
             {
                 o.SwaggerDoc($"v{Assembly.GetExecutingAssembly().GetName().Version.Major}", new OpenApiInfo
@@ -40,8 +53,7 @@ namespace Http.API
                 o.IgnoreObsoleteProperties();
                 o.CustomSchemaIds(t => t.FullName);
             });
-            services.AddCors();
-            services.AddControllers();
+            
 
             services.AddEndpointsApiExplorer();
         }

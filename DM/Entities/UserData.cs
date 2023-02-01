@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DM
+﻿namespace DM
 {
-    public  class UserData
+    public class UserData
     {
         /// <summary>
         /// user data id

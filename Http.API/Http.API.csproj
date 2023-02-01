@@ -41,7 +41,6 @@
 		<Exec Command="if exist $(OutputPath)api-docs\v1 rd /q /s $(OutputPath)api-docs\v1"></Exec>
 		<Exec Command="mkdir $(OutputPath)api-docs" ></Exec>
 		<Exec Command="mkdir $(OutputPath)api-docs\v1"  ></Exec>
-		<Exec Command="dotnet swagger &quot;tofile&quot; --output $(OutputPath)api-docs\v1\swagger.json &quot;$(OutputPath)$(AssemblyName).dll&quot; v1"></Exec>
 	</Target>
 
   <ItemGroup>

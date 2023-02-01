@@ -8,7 +8,7 @@
         /// <summary>
         ///     event id
         /// </summary>
-       
+
         public Guid Id { get; set; }
 
         /// <summary>

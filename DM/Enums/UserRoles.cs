@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UserDM.Enums
+﻿namespace UserDM.Enums
 {
     public enum UserRoles
     {
-
+        Tennant = 0,
+        TenantAdmin = 1,
+        User = 2,
     }
 }

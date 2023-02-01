@@ -1,5 +1,3 @@
-using System.Collections.ObjectModel;
-
 namespace DM
 {
     public class Tenant
@@ -8,7 +6,7 @@ namespace DM
         ///  tenant ID (tenant users group)
         /// </summary>
         public Guid Id { get; set; }
-               
+
         /// <summary>
         ///  tenant account creation date
         /// </summary>
