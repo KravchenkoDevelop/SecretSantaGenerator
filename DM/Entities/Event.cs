@@ -1,9 +1,11 @@
-﻿namespace DM
+﻿using DM.Entities;
+
+namespace DM
 {
     /// <summary>
     ///     event description
     /// </summary>
-    public class Event
+    public class Event:IEntity
     {
         /// <summary>
         ///     event id

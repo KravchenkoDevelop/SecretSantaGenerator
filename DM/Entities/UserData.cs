@@ -1,6 +1,8 @@
-﻿namespace DM
+﻿using DM.Entities;
+
+namespace DM
 {
-    public class UserData
+    public class UserData:IEntity
     {
         /// <summary>
         /// user data id

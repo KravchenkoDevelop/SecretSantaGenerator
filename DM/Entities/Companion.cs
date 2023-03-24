@@ -1,9 +1,11 @@
-﻿namespace DM
+﻿using DM.Entities;
+
+namespace DM
 {
     /// <summary>
     /// gift giver gift reciever pair
     /// </summary>
-    public class Companion
+    public class Companion:IEntity
     {
         /// <summary>
         ///  pair id

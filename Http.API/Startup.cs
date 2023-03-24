@@ -6,28 +6,14 @@ using DAL.Context;
 
 namespace Http.API
 {
-    public class Startup
-    {
-        public IConfiguration Configuration { get; }
-
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public void ConfigureServices(IServiceCollection services)
+    public static class Startup
+    {       
+        public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddMvc();
             services.AddCors();
             services.AddControllers();
-
-#if DEBUG 
-            var provider = services.BuildServiceProvider();
-            DataStub.InitStub(provider);
-            services.AddDbContext<StubDBContext>(o => o.UseInMemoryDatabase("SantaDB"));
-#endif
-            services.AddDbContext<SantaDBContext>(ServiceLifetime.Singleton);
-
+            services.AddLogging();
 
             services.AddSwaggerGen(o =>
             {
@@ -58,7 +44,7 @@ namespace Http.API
             services.AddEndpointsApiExplorer();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public static  void ConfigureApp(this IApplicationBuilder app)
         {
 #if DEBUG||MYTESTS 
             app.UseDeveloperExceptionPage();
@@ -77,9 +63,6 @@ namespace Http.API
                 o.SwaggerEndpoint("../api-docs/v1/swagger.json", $"API Secret Santa Generator v1");
             });
 
-
-            //app.UseSwagger();
-            //app.UseSwaggerUI();
 
             app.UseStatusCodePages();
             app.UseDefaultFiles(); app.UseHttpsRedirection();

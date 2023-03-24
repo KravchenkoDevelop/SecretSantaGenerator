@@ -1,9 +1,11 @@
-﻿namespace DM
+﻿using DM.Entities;
+
+namespace DM
 {
     /// <summary>
     ///     User hobbies or interests
     /// </summary>
-    public class Interest
+    public class Interest:IEntity
     {
         /// <summary>
         ///     interest id

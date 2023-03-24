@@ -1,6 +1,8 @@
+using DM.Entities;
+
 namespace DM
 {
-    public class Tenant
+    public class Tenant:IEntity
     {
         /// <summary>
         ///  tenant ID (tenant users group)

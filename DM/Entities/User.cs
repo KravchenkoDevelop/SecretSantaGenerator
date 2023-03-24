@@ -1,11 +1,12 @@
-﻿using UserDM.Enums;
+﻿using DM.Entities;
+using UserDM.Enums;
 
 namespace DM
 {
     /// <summary>
     ///     user description data
     /// </summary>
-    public class User
+    public class User:IEntity
     {
         /// <summary>
         ///     user details id

@@ -10,6 +10,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
 		<IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
+		<RunPostBuildEvent>Always</RunPostBuildEvent>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -36,11 +37,11 @@
 
 	<Target Name="SwaggerPostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="dotnet tool restore" />
-		<Exec Command="dotnet tool install --local Swashbuckle.AspNetCore.Cli --version 6.4.0"/>
 		<Exec Command="if exist $(OutputPath)api-docs rd /q /s $(OutputPath)api-docs"></Exec>
 		<Exec Command="if exist $(OutputPath)api-docs\v1 rd /q /s $(OutputPath)api-docs\v1"></Exec>
-		<Exec Command="mkdir $(OutputPath)api-docs" ></Exec>
-		<Exec Command="mkdir $(OutputPath)api-docs\v1"  ></Exec>
+		<Exec Command="mkdir $(OutputPath)api-docs"></Exec>
+		<Exec Command="mkdir $(OutputPath)api-docs\v1"></Exec>
+		<Exec Command="dotnet swagger &quot;tofile&quot; --output $(OutputPath)api-docs\v1\swagger.json &quot;$(OutputPath)$(AssemblyName).dll&quot; v1"></Exec>
 	</Target>
 
   <ItemGroup>
